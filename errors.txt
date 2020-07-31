@@ -1,0 +1,103 @@
+# This file contains error messages which are shown to user, when http/https
+# login is used.
+# These messages can be changed to make user interface more friendly, including
+# translations to different languages.
+#
+# Various variables can be used here as well. Most frequently used ones are:
+#	$(error-orig)	- original error message from hotspot
+#	$(ip)		- ip address of a client
+#	$(username)	- username of client trying to log in
+
+# internal-error
+# It should never happen. If it will, error page will be shown
+# displaying this error message (error-orig will describe what has happened)
+
+internal-error = 內部錯誤 ($(error-orig))
+
+# config-error
+# Should never happen if hotspot is configured properly.
+
+config-error = 熱點配置錯誤 ($(error-orig))
+
+# not-logged-in
+# Will happen, if status or logout page is requested by user,
+# which actually is not logged in
+
+not-logged-in = 你尚未登入 (ip $(ip))
+
+# ippool-empty
+# IP address for user is to be assigned from ip pool, but there are no more
+# addresses in that pool
+
+ippool-empty = 無法分配IP位址，沒有更多可用的IP位址
+# shutting-down
+# When shutdown is executed, new clients are not accepted
+
+shutting-down = 熱點服務已關閉
+
+# user-session-limit
+# If user profile has limit of shared-users, then this error will be shown
+# after reaching this limit
+
+user-session-limit = 此用戶 $(username)已達最大連線數量
+
+# license-session-limit
+# Depending on licence number of active hotspot clients is limited to
+# one or another amount. If this limit is reached, following error is displayed.
+
+license-session-limit = 已超過可用的時間 ($(error-orig))
+
+# wrong-mac-username
+# If username looks like MAC address (12:34:56:78:9a:bc), but is not
+# a MAC address of this client, login is rejected
+
+wrong-mac-username = 無效的MAC位址 ($(username))
+
+# chap-missing
+# If http-chap login method is used, but hotspot program does not receive
+# back encrypted password, this error message is shown.
+# Possible reasons of failure:
+#	- JavaScript is not enabled in web browser;
+#	- login.html page is not valid;
+#	- challenge value has expired on server (more than 1h of inactivity);
+#	- http-chap login method is recently removed;
+# If JavaScript is enabled and login.html page is valid,
+# then retrying to login usually fixes this problem.
+
+chap-missing = 瀏覽器未發送質詢響應（請重試並啟用JavaScript）
+
+# invalid-username
+# Most general case of invalid username or password. If RADIUS server
+# has sent an error string with Access-Reject message, then it will
+# override this setting.
+
+invalid-username = 帳號或密碼錯誤
+
+# invalid-mac
+# Local users (on hotspot server) can be bound to some MAC address. If login
+# from different MAC is tried, this error message will be shown.
+
+invalid-mac = $(username) 不允許使用MAC位址登入
+
+# uptime-limit, traffic-limit
+# For local hotspot users in case if limits are reached
+
+uptime-limit = $(username) 已超過一次可用的時間
+traffic-limit = $(username) 已超過可用流量
+
+# radius-timeout
+# User is authenticated by RADIUS server, but no response is received from it,
+# following error will be shown.
+
+radius-timeout = 認證伺服器沒有回應。
+
+# auth-in-progress
+# Authorization in progress. Client already has issued an authorization request
+# which is not yet complete.
+
+auth-in-progress = 認證中，如沒有回應請稍後在試。
+
+# radius-reply
+# Radius server returned some custom error message
+
+radius-reply = $(error-orig)
